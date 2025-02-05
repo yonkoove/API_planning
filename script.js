@@ -40,19 +40,19 @@ const activities = [
     {
         time: '11:00',
         title: 'Réunion de la DPI',
-        description: 'Discussion sur la direction des projets internes.',
+        description: '',
         image: 'briefing.jpg'
     },
     {
         time: '12:00',
         title: 'Pause déjeuner',
-        description: 'Détente et repas.',
+        description: '',
         image: 'Déjeuner.jpg'
     },
     {
         time: '15:00',
         title: 'Réunion sur les segments critiques',
-        description: 'Analyse des points sensibles dans le projet.',
+        description: '',
         image: 'Rencontre.jpg'
     },
 ];
@@ -65,9 +65,11 @@ class ActivitiesCarousel {
         this.track = document.getElementById('activities-track');
         this.prevButton = document.getElementById('prev-button');
         this.nextButton = document.getElementById('next-button');
+        this.scrollInterval = null; // Pour le défilement automatique
 
         this.init();
         this.setupControls();
+        this.startAutoScroll();
     }
 
     setupControls() {
@@ -86,30 +88,27 @@ class ActivitiesCarousel {
     }
 
     updateCarousel() {
-        this.track.scrollLeft = this.currentIndex * 320; // Ajusté pour un meilleur alignement
+        this.track.scrollLeft = this.currentIndex * 330; // Ajuste en fonction de la largeur des cartes
     }
 
     createActivities() {
         this.activities.forEach(activity => {
             const card = document.createElement('div');
             card.className = 'activity-card';
-
-            const image = document.createElement('img');
-            image.src = activity.image;
-            image.alt = `Image de l'activité: ${activity.title}`;
-
+            card.style.backgroundImage = `url(${activity.image})`; // Définir l'image d'arrière-plan
             const overlay = document.createElement('div');
             overlay.className = 'activity-overlay';
-            overlay.innerHTML = `
-                <h3>${activity.title}</h3>
-                <p class="time">${activity.time}</p>
-                <p>${activity.description}</p>
-            `;
-
-            card.appendChild(image);
+            overlay.innerHTML = `<h3>${activity.title}</h3><p class="time">${activity.time}</p><p>${activity.description}</p>`;
             card.appendChild(overlay);
             this.track.appendChild(card);
         });
+    }
+
+    startAutoScroll() {
+        // Intervalle pour faire défiler automatiquement les cartes toutes les 4 secondes
+        this.scrollInterval = setInterval(() => {
+            this.next();
+        }, 4000); // 4 secondes
     }
 
     init() {
@@ -121,7 +120,7 @@ class ActivitiesCarousel {
 function init() {
     updateDateTime();
     new ActivitiesCarousel(activities);
-
+    
     // Mise à jour de l'heure toutes les secondes
     setInterval(updateDateTime, 1000);
 }
