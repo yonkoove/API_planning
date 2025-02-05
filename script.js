@@ -55,18 +55,6 @@ const activities = [
         description: '',
         image: 'Rencontre.jpg'
     },
-    {
-        time: '15:00',
-        title: 'Coordination DGAPI, SDCOM',
-        description: '',
-        image: 'Atelier.jpg'
-    },
-    {
-        time: '16:00',
-        title: 'Partenariat stratégique',
-        description: '',
-        image: 'Signature.jpg'
-    }
 ];
 
 // Actualités défilantes
