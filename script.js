@@ -40,49 +40,21 @@ const activities = [
     {
         time: '11:00',
         title: 'Réunion de la DPI',
-        description: '',
+        description: 'Discussion sur la direction des projets internes.',
         image: 'briefing.jpg'
     },
     {
         time: '12:00',
         title: 'Pause déjeuner',
-        description: '',
+        description: 'Détente et repas.',
         image: 'Déjeuner.jpg'
     },
     {
         time: '15:00',
         title: 'Réunion sur les segments critiques',
-        description: '',
+        description: 'Analyse des points sensibles dans le projet.',
         image: 'Rencontre.jpg'
     },
-];
-
-
-// Actualités défilantes
-const news = [
-    "Nouveau projet d'investissement dans le secteur agricole",
-    "Signature d'un accord de partenariat avec la BAD",
-    "Mission économique prévue le mois prochain",
-    "Ouverture d'un nouveau bureau régional"
-];
-
-// Événements à venir
-const events = [
-    {
-        date: '15 Février 2024',
-        title: 'Forum des Investisseurs',
-        description: 'Palais des Congrès'
-    },
-    {
-        date: '22 Février 2024',
-        title: 'Séminaire sur les opportunités d\'investissement',
-        description: 'Hôtel Hilton'
-    },
-    {
-        date: '1 Mars 2024',
-        title: 'Mission économique',
-        description: 'Délégation internationale'
-    }
 ];
 
 // Gestion du carrousel d'activités
@@ -114,17 +86,27 @@ class ActivitiesCarousel {
     }
 
     updateCarousel() {
-        this.track.scrollLeft = this.currentIndex * 300; // Adjust based on card width
+        this.track.scrollLeft = this.currentIndex * 320; // Ajusté pour un meilleur alignement
     }
 
     createActivities() {
         this.activities.forEach(activity => {
             const card = document.createElement('div');
             card.className = 'activity-card';
-            card.style.backgroundImage = `url(${activity.image})`; // Set the background image
+
+            const image = document.createElement('img');
+            image.src = activity.image;
+            image.alt = `Image de l'activité: ${activity.title}`;
+
             const overlay = document.createElement('div');
             overlay.className = 'activity-overlay';
-            overlay.innerHTML = `<h3>${activity.title}</h3><p>${activity.time}</p><p>${activity.description}</p>`;
+            overlay.innerHTML = `
+                <h3>${activity.title}</h3>
+                <p class="time">${activity.time}</p>
+                <p>${activity.description}</p>
+            `;
+
+            card.appendChild(image);
             card.appendChild(overlay);
             this.track.appendChild(card);
         });
@@ -135,76 +117,13 @@ class ActivitiesCarousel {
     }
 }
 
-// Affichage des événements
-let currentEventIndex = 0;
-const EVENT_TRANSITION_DELAY = 10000; // 10 secondes
-
-function displayEvents() {
-    const eventsContainer = document.getElementById('events-content');
-    eventsContainer.innerHTML = '';
-    
-    events.forEach((event, index) => {
-        const eventElement = document.createElement('div');
-        eventElement.className = 'event-item';
-        if (index === currentEventIndex) {
-            eventElement.classList.add('active');
-        }
-        
-        eventElement.innerHTML = `
-            <div class="event-date">${event.date}</div>
-            <div class="event-title">${event.title}</div>
-            <div class="event-description">${event.description}</div>
-        `;
-        
-        eventsContainer.appendChild(eventElement);
-    });
-}
-
-function rotateEvents() {
-    const eventItems = document.querySelectorAll('.event-item');
-    eventItems.forEach((item, index) => {
-        item.classList.remove('active');
-        if (index === currentEventIndex) {
-            item.classList.add('active', 'animate');
-        } else {
-            item.classList.remove('animate');
-        }
-    });
-    
-    currentEventIndex = (currentEventIndex + 1) % events.length;
-}
-
-// Fetch live weather data for Yaoundé
-const fetchWeather = () => {
-    const url = 'https://www.metaweather.com/api/location/search/?query=Yaoundé';
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const woeid = data[0].woeid; // Get the WOEID for Yaoundé
-            return fetch(`https://www.metaweather.com/api/location/${woeid}/`);
-        })
-        .then(response => response.json())
-        .then(data => {
-            const temperature = data.consolidated_weather[0].the_temp;
-            const description = data.consolidated_weather[0].weather_state_name;
-            document.getElementById('weather-info').innerHTML = `Temperature: ${temperature.toFixed(1)}°C, Condition: ${description}`;
-        })
-        .catch(error => console.error('Error fetching weather data:', error));
-};
-
 // Initialisation
 function init() {
     updateDateTime();
     new ActivitiesCarousel(activities);
-    displayEvents();
-    fetchWeather();
-    
+
     // Mise à jour de l'heure toutes les secondes
     setInterval(updateDateTime, 1000);
-    
-    // Rotation des événements toutes les 10 secondes
-    setInterval(rotateEvents, EVENT_TRANSITION_DELAY);
 }
 
 // Démarrage de l'application
