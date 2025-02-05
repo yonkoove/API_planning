@@ -301,7 +301,7 @@ main {
 .activity-card h3,
 .activity-card p {
     position: absolute; /* Position text absolutely */
-    bottom: 10px; /* Position text at the bottom */
+    top: 10px; /* Position text at the bottom */
     left: 10px; /* Add some left margin */
     margin: 0; /* Remove default margin */
     color: white; /* Ensure text is readable over images */
