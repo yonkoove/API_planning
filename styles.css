@@ -93,28 +93,28 @@ header .time-right {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
+    width: 350px;
     flex-shrink: 0;
     transition: transform 0.3s ease;
     display: flex;
-    flex-direction: column;
     margin-right: 20px;
     padding: 15px;
+    gap: 15px;
 }
 
 .activity-card:hover {
     transform: scale(1.05);
 }
 
-.activity-card img {
-    width: 100%;
-    height: 150px;
+.activity-card .activity-image {
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.activity-overlay {
-    padding-top: 10px;
+.activity-card .activity-content {
+    flex: 1;
 }
 
 .activity-overlay h3 {
