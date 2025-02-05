@@ -3,7 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px; /* Taille de base augmentée pour plus de lisibilité */
     line-height: 1.6;
-    background-image: url('background.jpg'); /* Image de fond pour la page entière */
+    background-image: url('fond_page.jpg'); /* Image de fond pour la page entière */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -24,7 +24,7 @@ body {
 
 /* Bandeau avec logo et heure */
 .header-banner {
-    background-image: url('header-background.jpg'); /* Image de fond du bandeau */
+    background-image: url('fond.jpg'); /* Image de fond du bandeau */
     background-size: cover;
     background-position: center;
     color: #fff;
