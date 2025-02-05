@@ -50,12 +50,13 @@ const activities = [
         image: 'Déjeuner.jpg'
     },
     {
-        time: '14:00',
+        time: '15:00',
         title: 'Réunion sur les segments critiques',
         description: '',
         image: 'Rencontre.jpg'
     },
 ];
+
 
 // Actualités défilantes
 const news = [
