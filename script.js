@@ -40,19 +40,22 @@ const activities = [
     {
         time: '11:00',
         title: 'Réunion de la DPI',
-        description: '',
+        participants: '10 participants',
+        location: 'Salle 101',
         image: 'briefing.jpg'
     },
     {
         time: '12:00',
         title: 'Pause déjeuner',
-        description: '',
+        participants: 'Tous',
+        location: 'Cafétéria',
         image: 'Déjeuner.jpg'
     },
     {
         time: '15:00',
         title: 'Réunion sur les segments critiques',
-        description: '',
+        participants: '5 personnes',
+        location: 'Salle de conférence',
         image: 'Rencontre.jpg'
     },
 ];
@@ -61,54 +64,36 @@ const activities = [
 class ActivitiesCarousel {
     constructor(activities) {
         this.activities = activities;
-        this.currentIndex = 0;
         this.track = document.getElementById('activities-track');
-        this.prevButton = document.getElementById('prev-button');
-        this.nextButton = document.getElementById('next-button');
-        this.scrollInterval = null; // Pour le défilement automatique
+        this.currentIndex = 0;
 
         this.init();
-        this.setupControls();
         this.startAutoScroll();
-    }
-
-    setupControls() {
-        this.prevButton.addEventListener('click', () => this.prev());
-        this.nextButton.addEventListener('click', () => this.next());
-    }
-
-    prev() {
-        this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.activities.length - 1;
-        this.updateCarousel();
-    }
-
-    next() {
-        this.currentIndex = (this.currentIndex < this.activities.length - 1) ? this.currentIndex + 1 : 0;
-        this.updateCarousel();
-    }
-
-    updateCarousel() {
-        this.track.scrollLeft = this.currentIndex * 330; // Ajuste en fonction de la largeur des cartes
     }
 
     createActivities() {
         this.activities.forEach(activity => {
             const card = document.createElement('div');
             card.className = 'activity-card';
-            card.style.backgroundImage = `url(${activity.image})`; // Définir l'image d'arrière-plan
+            card.style.backgroundImage = `url(${activity.image})`; // Image de fond
             const overlay = document.createElement('div');
             overlay.className = 'activity-overlay';
-            overlay.innerHTML = `<h3>${activity.title}</h3><p class="time">${activity.time}</p><p>${activity.description}</p>`;
+            overlay.innerHTML = `
+                <h3>${activity.title}</h3>
+                <p class="time">${activity.time}</p>
+                <p class="participants">${activity.participants}</p>
+                <p class="location">${activity.location}</p>
+            `;
             card.appendChild(overlay);
             this.track.appendChild(card);
         });
     }
 
     startAutoScroll() {
-        // Intervalle pour faire défiler automatiquement les cartes toutes les 4 secondes
-        this.scrollInterval = setInterval(() => {
-            this.next();
-        }, 4000); // 4 secondes
+        setInterval(() => {
+            this.currentIndex = (this.currentIndex + 1) % this.activities.length;
+            this.track.scrollLeft = this.currentIndex * 330; // Espacement entre les cartes
+        }, 4000); // Le défilement automatique se fait toutes les 4 secondes
     }
 
     init() {
