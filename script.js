@@ -38,33 +38,33 @@ function updateDateTime() {
 // Programme des activités (exemple)
 const activities = [
     {
-        time: '09:00',
-        title: 'Réunion de briefing',
-        description: 'Point sur les projets en cours',
+        time: '11:00',
+        title: 'Réunion de briefing de la DPI',
+        description: '',
         image: 'briefing.jpg'
     },
     {
-        time: '10:30',
-        title: 'Rencontre avec les investisseurs',
-        description: 'Présentation des opportunités d\'investissement',
-        image: 'Rencontre.jpg'
-    },
-    {
         time: '12:00',
-        title: 'Déjeuner d\'affaires',
-        description: 'Restaurant Le Méridien',
+        title: 'Pause déjeuner',
+        description: '',
         image: 'Déjeuner.jpg'
     },
     {
         time: '14:00',
-        title: 'Atelier sur le climat des affaires',
-        description: 'Salle de conférence principale',
+        title: 'Restitution de l\'étude sur les segments critiques',
+        description: '',
+        image: 'Rencontre.jpg'
+    },
+    {
+        time: '15:00',
+        title: 'Réunion de Coordination DGAPI, SDCOM',
+        description: '',
         image: 'Atelier.jpg'
     },
     {
         time: '16:00',
-        title: 'Signature de convention',
-        description: 'Partenariat stratégique',
+        title: 'Partenariat stratégique',
+        description: '',
         image: 'Signature.jpg'
     }
 ];
