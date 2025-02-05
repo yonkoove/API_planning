@@ -75,16 +75,25 @@ class ActivitiesCarousel {
         this.activities.forEach(activity => {
             const card = document.createElement('div');
             card.className = 'activity-card';
-            card.style.backgroundImage = `url(${activity.image})`; // Image de fond
-            const overlay = document.createElement('div');
-            overlay.className = 'activity-overlay';
-            overlay.innerHTML = `
+
+            // Image
+            const image = document.createElement('img');
+            image.src = activity.image;
+            image.alt = activity.title;
+            image.className = 'activity-image';
+
+            // Contenu texte
+            const content = document.createElement('div');
+            content.className = 'activity-content';
+            content.innerHTML = `
                 <h3>${activity.title}</h3>
                 <p class="time">${activity.time}</p>
                 <p class="participants">${activity.participants}</p>
                 <p class="location">${activity.location}</p>
             `;
-            card.appendChild(overlay);
+
+            card.appendChild(image);
+            card.appendChild(content);
             this.track.appendChild(card);
         });
     }
@@ -92,7 +101,7 @@ class ActivitiesCarousel {
     startAutoScroll() {
         setInterval(() => {
             this.currentIndex = (this.currentIndex + 1) % this.activities.length;
-            this.track.scrollLeft = this.currentIndex * 330; // Espacement entre les cartes
+            this.track.scrollLeft = this.currentIndex * 380; // Espacement entre les cartes
         }, 4000); // Le défilement automatique se fait toutes les 4 secondes
     }
 
