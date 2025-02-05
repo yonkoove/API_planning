@@ -39,7 +39,7 @@ function updateDateTime() {
 const activities = [
     {
         time: '11:00',
-        title: 'Réunion de briefing de la DPI',
+        title: 'Réunion de la DPI',
         description: '',
         image: 'briefing.jpg'
     },
@@ -51,13 +51,13 @@ const activities = [
     },
     {
         time: '14:00',
-        title: 'Restitution de l\'étude sur les segments critiques',
+        title: 'Réunion sur les segments critiques',
         description: '',
         image: 'Rencontre.jpg'
     },
     {
         time: '15:00',
-        title: 'Réunion de Coordination DGAPI, SDCOM',
+        title: 'Coordination DGAPI, SDCOM',
         description: '',
         image: 'Atelier.jpg'
     },
